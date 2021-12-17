@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,MainActivity2.class);
 //                intent.putExtra("text","Hello");
-                intent.putExtra("arr_drawable",mArrDrawable);
+//                intent.putExtra("arr_drawable",mArrDrawable);
+
+                Animal animal = new Animal("cat",2);
+                intent.putExtra("animal", animal);
                 startActivity(intent);
             }
         });
