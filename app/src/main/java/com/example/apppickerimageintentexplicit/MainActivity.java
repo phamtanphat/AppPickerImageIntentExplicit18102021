@@ -1,10 +1,14 @@
 package com.example.apppickerimageintentexplicit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -43,5 +47,22 @@ public class MainActivity extends AppCompatActivity {
         String name = arrDrawable[index];
         int resourceImage = getResources().getIdentifier(name,"drawable",getPackageName());
         return resourceImage;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_item_refresh:
+                mResourceRandom = randomImage(mArrDrawable);
+                mImgRandom.setImageResource(mResourceRandom);
+                break;
+        }
+        return true;
     }
 }
