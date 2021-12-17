@@ -16,8 +16,9 @@ public class MainActivity2 extends AppCompatActivity {
         // Get data
         Intent intent = getIntent();
         if (intent != null){
-            String text = intent.getStringExtra("text");
-            Toast.makeText(MainActivity2.this, text, Toast.LENGTH_SHORT).show();
+//            String text = intent.getStringExtra("text");
+            String[] arrDrawable = intent.getStringArrayExtra("arr_drawable");
+            Toast.makeText(MainActivity2.this, arrDrawable.length + "", Toast.LENGTH_SHORT).show();
         }
     }
 }
