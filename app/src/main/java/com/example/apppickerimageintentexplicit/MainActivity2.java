@@ -18,7 +18,7 @@ public class MainActivity2 extends AppCompatActivity {
         if (intent != null){
 //            String text = intent.getStringExtra("text");
 //            String[] arrDrawable = intent.getStringArrayExtra("arr_drawable");
-            Animal animal = (Animal) intent.getSerializableExtra("animal");
+            Animal animal = intent.getParcelableExtra("animal");
             Toast.makeText(MainActivity2.this, animal.toString() + "", Toast.LENGTH_SHORT).show();
         }
     }
