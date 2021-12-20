@@ -4,18 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class MainActivity2 extends AppCompatActivity {
 
     TableLayout mTbLayout;
-    int mColumn , mRow , mCount;
+    int mColumn, mRow, mCount;
+    int mWidthScreen, mHeightScreen;
     int mResourceId;
     String[] mArrDrawable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,24 +36,35 @@ public class MainActivity2 extends AppCompatActivity {
     private void initView() {
         // Get data
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             mArrDrawable = intent.getStringArrayExtra("arr_drawable");
+            Collections.shuffle(Arrays.asList(mArrDrawable));
         }
 
-        mRow = (int) Math.ceil( Double.parseDouble ((mArrDrawable.length / 3f)+""));
+        // Get dimension screen
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        mHeightScreen = displayMetrics.heightPixels;
+        mWidthScreen = displayMetrics.widthPixels;
+
+        mRow = (int) Math.ceil(Double.parseDouble((mArrDrawable.length / 3f) + ""));
         mCount = 0;
         mColumn = 3;
         // 6 dong 3 cot
-        for (int i = 0 ; i < mRow ; i++){
+        for (int i = 0; i < mRow; i++) {
             //Create row
             TableRow tableRow = new TableRow(this);
-            for (int y = 0 ; y < mColumn ; y++){
-                if (mCount < mArrDrawable.length){
+            for (int y = 0; y < mColumn; y++) {
+                if (mCount < mArrDrawable.length) {
                     // Tính vị trí của hình chữ nhật khi biết trục tung và hoành
 //                    mIndex =  mColumn * i  + y ;
-                    mResourceId = getResources().getIdentifier(mArrDrawable[mCount],"drawable",getPackageName());
+                    mResourceId = getResources().getIdentifier(mArrDrawable[mCount], "drawable", getPackageName());
+
+                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(mWidthScreen / 3, mWidthScreen / 3);
                     ImageView imageView = new ImageView(this);
                     imageView.setImageResource(mResourceId);
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    imageView.setLayoutParams(layoutParams);
                     tableRow.addView(imageView);
                     mCount++;
                 }
