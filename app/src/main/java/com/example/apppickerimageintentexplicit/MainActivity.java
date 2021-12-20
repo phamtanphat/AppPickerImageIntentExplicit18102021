@@ -35,11 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,MainActivity2.class);
-//                intent.putExtra("text","Hello");
-//                intent.putExtra("arr_drawable",mArrDrawable);
-
-                Animal animal = new Animal("cat",2);
-                intent.putExtra("animal", animal);
+                intent.putExtra("arr_drawable",mArrDrawable);
                 startActivity(intent);
             }
         });
