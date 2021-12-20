@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -13,6 +14,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     TableLayout mTbLayout;
     int mColumn , mRow , mCount;
+    int mResourceId;
     String[] mArrDrawable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,11 @@ public class MainActivity2 extends AppCompatActivity {
             TableRow tableRow = new TableRow(this);
             for (int y = 0 ; y < mColumn ; y++){
                 if (mCount < mArrDrawable.length){
+                    // Tính vị trí của hình chữ nhật khi biết trục tung và hoành
+//                    mIndex =  mColumn * i  + y ;
+                    mResourceId = getResources().getIdentifier(mArrDrawable[mCount],"drawable",getPackageName());
                     ImageView imageView = new ImageView(this);
-                    imageView.setImageResource(R.drawable.bo);
+                    imageView.setImageResource(mResourceId);
                     tableRow.addView(imageView);
                     mCount++;
                 }
