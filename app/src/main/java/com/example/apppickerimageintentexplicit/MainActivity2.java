@@ -2,6 +2,7 @@ package com.example.apppickerimageintentexplicit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -66,13 +67,16 @@ public class MainActivity2 extends AppCompatActivity {
                     TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(mWidthScreen / 3 , mWidthScreen / 3);
                     ImageView imageView = new ImageView(this);
                     imageView.setImageResource(mResourceId);
-                    imageView.setTag(mCount);
+                    imageView.setTag(mResourceId);
                     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     imageView.setLayoutParams(layoutParams);
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(MainActivity2.this, mArrDrawable[(int) imageView.getTag()], Toast.LENGTH_SHORT).show();
+                            Intent intentData = new Intent();
+                            intentData.putExtra("resourceData",(int) imageView.getTag());
+                            setResult(Activity.RESULT_OK,intentData);
+                            finish();
                         }
                     });
                     tableRow.addView(imageView);
