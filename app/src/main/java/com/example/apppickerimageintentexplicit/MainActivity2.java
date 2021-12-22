@@ -3,10 +3,13 @@ package com.example.apppickerimageintentexplicit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -47,6 +50,7 @@ public class MainActivity2 extends AppCompatActivity {
         mHeightScreen = displayMetrics.heightPixels;
         mWidthScreen = displayMetrics.widthPixels;
 
+
         mRow = (int) Math.ceil(Double.parseDouble((mArrDrawable.length / 3f) + ""));
         mCount = 0;
         mColumn = 3;
@@ -59,12 +63,18 @@ public class MainActivity2 extends AppCompatActivity {
                     // Tính vị trí của hình chữ nhật khi biết trục tung và hoành
 //                    mIndex =  mColumn * i  + y ;
                     mResourceId = getResources().getIdentifier(mArrDrawable[mCount], "drawable", getPackageName());
-
-                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(mWidthScreen / 3, mWidthScreen / 3);
+                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(mWidthScreen / 3 , mWidthScreen / 3);
                     ImageView imageView = new ImageView(this);
                     imageView.setImageResource(mResourceId);
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    imageView.setTag(mCount);
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     imageView.setLayoutParams(layoutParams);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MainActivity2.this, mArrDrawable[(int) imageView.getTag()], Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     tableRow.addView(imageView);
                     mCount++;
                 }
